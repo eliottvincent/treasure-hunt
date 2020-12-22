@@ -7,7 +7,7 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#include "sdlFunctions.h"
+#include "sdlFunctions.hh"
 
 using namespace std;
 

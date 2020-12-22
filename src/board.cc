@@ -7,7 +7,7 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#include "board.h"
+#include "board.hh"
 
 using namespace std;
 

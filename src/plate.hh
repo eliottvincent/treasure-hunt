@@ -13,8 +13,8 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cstdlib>
-#include "treasureHunt.h"
-#include "../lib/sdlFunctions.h"
+#include "treasureHunt.hh"
+#include "../lib/sdlFunctions.hh"
 
 /**************** Name of the type **************************
 ∗ Coin          			                                *

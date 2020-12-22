@@ -7,7 +7,7 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
- #include "gain.h"
+ #include "gain.hh"
 
 using namespace std;
 

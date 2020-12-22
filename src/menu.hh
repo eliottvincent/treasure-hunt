@@ -1,70 +1,58 @@
-#ifndef game_H
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: game.h
+ * File: menu.h
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#define game_H
+#ifndef menu_H
+#define menu_H
 
 #include <SDL2/SDL.h>
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../lib/sdlFunctions.h"
-#include "plate.h"
-#include "treasureHunt.h"
-#include "button.h"
-#include "player.h"
-#include "combo.h"
-#include "board.h"
-#include "gain.h"
+#include "../lib/sdlFunctions.hh"
+#include "plate.hh"
+#include "treasureHunt.hh"
+#include "button.hh"
+#include "player.hh"
 
 /**************** Name of the function **********************
-∗ game						                                *
+∗ menu()			                                        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It loads the assets and creates the game's logic 	        *
+∗ It loads the necessary assets for the menu, and manages   *
+* the gamestate                                             *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
 ∗ The screen's surface                                      *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The gamestate                                             *
 ************************************************************/
-int game(SDL_Window *screen);
+int menu(SDL_Window *screen);
 
 /**************** Name of the function **********************
-∗ manageClick						                        *
+∗ menuEvents()			                                    *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It manages the clicks ers of the board        	        *
+∗ It manages the SDL events in the menu                     *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The SDL events, the players                               *
+∗ The buttons                                               *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ Nothing                                                   *
+∗ The gamestate                                             *
 ************************************************************/
-void manageClick(SDL_Event &event, Player players[], int &current_turn, Map tiles);
+int menuEvents(Button *play, Button *quit);
+
 
 /**************** Name of the function **********************
-∗ getOtherPlayer    		                                *
+∗ drawMenu()			                                    *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It checks if the players need to turn or not     	        *
+∗ It draws the menu on the screen                           *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The players                                               *
+∗ The necessary surfaces                                    *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The turn of the player                                    *
+∗ The menu                                                  *
 ************************************************************/
-Player getOtherPlayer(Player players[], int currentTurn);
-
-/**************** Name of the function **********************
-∗ doesAPlayerWon()		                                    *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It checks if a player won                        	        *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The player, the plate                                     *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The winner                                                *
-************************************************************/
-int doesAPlayerWon(Player players[], Map tiles);
+void drawMenu(SDL_Window *screen, SDL_Surface *background, Button *play, Button *quit);
 
 #endif

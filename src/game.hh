@@ -1,58 +1,70 @@
+#ifndef game_H
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: menu.h
+ * File: game.h
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#ifndef menu_H
-#define menu_H
+#define game_H
 
 #include <SDL2/SDL.h>
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../lib/sdlFunctions.h"
-#include "plate.h"
-#include "treasureHunt.h"
-#include "button.h"
-#include "player.h"
+#include "../lib/sdlFunctions.hh"
+#include "plate.hh"
+#include "treasureHunt.hh"
+#include "button.hh"
+#include "player.hh"
+#include "combo.hh"
+#include "board.hh"
+#include "gain.hh"
 
 /**************** Name of the function **********************
-∗ menu()			                                        *
+∗ game						                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It loads the necessary assets for the menu, and manages   *
-* the gamestate                                             *
+∗ It loads the assets and creates the game's logic 	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
 ∗ The screen's surface                                      *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The gamestate                                             *
 ************************************************************/
-int menu(SDL_Window *screen);
+int game(SDL_Window *screen);
 
 /**************** Name of the function **********************
-∗ menuEvents()			                                    *
+∗ manageClick						                        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It manages the SDL events in the menu                     *
+∗ It manages the clicks ers of the board        	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The buttons                                               *
+∗ The SDL events, the players                               *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The gamestate                                             *
+∗ Nothing                                                   *
 ************************************************************/
-int menuEvents(Button *play, Button *quit);
-
+void manageClick(SDL_Event &event, Player players[], int &current_turn, Map tiles);
 
 /**************** Name of the function **********************
-∗ drawMenu()			                                    *
+∗ getOtherPlayer    		                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It draws the menu on the screen                           *
+∗ It checks if the players need to turn or not     	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The necessary surfaces                                    *
+∗ The players                                               *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The menu                                                  *
+∗ The turn of the player                                    *
 ************************************************************/
-void drawMenu(SDL_Window *screen, SDL_Surface *background, Button *play, Button *quit);
+Player getOtherPlayer(Player players[], int currentTurn);
+
+/**************** Name of the function **********************
+∗ doesAPlayerWon()		                                    *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
+∗ It checks if a player won                        	        *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
+∗ The player, the plate                                     *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
+∗ The winner                                                *
+************************************************************/
+int doesAPlayerWon(Player players[], Map tiles);
 
 #endif

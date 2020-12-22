@@ -7,7 +7,7 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#include "item.h"
+#include "item.hh"
 
 Item createPlayer(int x, int y)
 {

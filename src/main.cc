@@ -8,11 +8,11 @@
  *********************************************************************************************/
 
 #include <SDL2/SDL.h>
-#include "treasureHunt.h"
-#include "../lib/sdlFunctions.h"
-#include "game.h"
-#include "menu.h"
-#include "gain.h"
+#include "treasureHunt.hh"
+#include "../lib/sdlFunctions.hh"
+#include "game.hh"
+#include "menu.hh"
+#include "gain.hh"
 #include <cstdlib>
 
 /**************** Name of the function **********************

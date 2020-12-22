@@ -7,7 +7,7 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#include "game.h"
+#include "game.hh"
 
 using namespace std;
 

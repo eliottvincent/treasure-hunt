@@ -12,8 +12,8 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "player.h"
-#include "../lib/sdlFunctions.h"
+#include "player.hh"
+#include "../lib/sdlFunctions.hh"
 
 /**************** Name of the strcture **********************
 ∗ Combo						                                *

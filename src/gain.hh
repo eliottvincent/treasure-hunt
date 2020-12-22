@@ -14,10 +14,10 @@
 #include <fstream>
 #include <string>
 #include <climits>
-#include "treasureHunt.h"
-#include "../lib/sdlFunctions.h"
-#include "button.h"
-#include "player.h"
+#include "treasureHunt.hh"
+#include "../lib/sdlFunctions.hh"
+#include "button.hh"
+#include "player.hh"
 
 /**************** Name of the function **********************
 ∗ gain						                                *

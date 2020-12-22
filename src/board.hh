@@ -1,72 +1,76 @@
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: button.h
+ * File: board.h
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
- #ifndef BUTTON_H
-#define BUTTON_H
+#ifndef BOARD_H
+#define BOARD_H
+
 
 #include <SDL2/SDL.h>
-#include "../lib/sdlFunctions.h"
-#include <cstdlib>
 #include <string>
+#include "combo.hh"
+#include "../lib/sdlFunctions.hh"
 
 /**************** Name of the structure *********************
-∗ Button						                            *
+∗ Board						                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It defines the parameters of the buttons        	        *
+∗ It defines the parameters of the board        	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
 ∗ Nothing                                                   *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ Nothing                                                   *
 ************************************************************/
-struct Button
+
+struct Board
 {
     int x;
     int y;
-    int width;
-    int height;
-    SDL_Surface *sprite;
-    TTF_Font *font;
-    std::string text;
+    float frame;
+    Combo *combo1;
+    Combo *combo2;
+    SDL_Surface *player_1;
+    SDL_Surface *player_2;
+    SDL_Surface *background;
+    SDL_Surface *coins;
 };
 
 /**************** Name of the function **********************
-∗ createButton  			                                *
+∗ buildboard()						                        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It builds a button with the parameters set by the	        *
-* strcture "Button"                                         *
+∗ It builds the board, with the parameters of the structure *
+* "Board"                                                   *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The surface, a text string, coordinates, font name        *
+∗ x, y, both combos                                         *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ A button                                                   *
+∗ i, the index of the frame                                 *
 ************************************************************/
-Button createButton(SDL_Surface *psprite, std::string text, int px, int yp, TTF_Font *font);
+Board buildBoard(int x, int y, Combo *combo1, Combo *combo2);
 
 /**************** Name of the function **********************
-∗ drawButton						                        *
+∗ laodBoard()					                            *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It draws a button        	                                *
+∗ It loads the board (players, coins, etc...)      	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The button's surface, the screen's surface                *
+∗ The structure "Board", all the surfaces needed            *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ A button                                                  *
+∗ All the surfaces created                                  *
 ************************************************************/
-void drawButton(Button *pbutton, SDL_Window *screen);
+void loadBoard(Board &board, SDL_Surface *player_1, SDL_Surface *player_2, SDL_Surface *coins, SDL_Surface  *background);
 
 /**************** Name of the function **********************
-∗ buttonEvent   			                                *
+∗ drawBoard()				                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It manages the mouse's events on the button     	        *
+∗ It draws the board on the screen               	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ A SDL event, the button's surface                         *
+∗ The font, all the surfaces created by loadBoard()         *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ a bool                                                    *
+∗ The board                                                 *
 ************************************************************/
-bool buttonEvent(SDL_Event *event, Button *button);
+void drawBoard(Board board,TTF_Font *font, SDL_Window *screen, SDL_Surface *player1, SDL_Surface *player2, int currentlyPlaying);
 
 #endif

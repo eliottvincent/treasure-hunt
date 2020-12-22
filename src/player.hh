@@ -13,8 +13,8 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 #include <climits>
-#include "../lib/sdlFunctions.h"
-#include "plate.h"
+#include "../lib/sdlFunctions.hh"
+#include "plate.hh"
 
 /**************** Name of the structure *********************
 ∗ Player()			                                        *
