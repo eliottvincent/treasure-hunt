@@ -127,7 +127,7 @@ void drawPlate(Map myplate, SDL_Texture *coins)
                 rect.w = 60;
                 rect.h = 60;
             }
-            apply_surface(i*60,u*60,coins, &rect);
+            apply_texture(coins, i*60, u*60, &rect);
 
         }
     }

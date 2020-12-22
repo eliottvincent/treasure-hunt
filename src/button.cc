@@ -29,7 +29,8 @@ Button createButton(SDL_Texture *texture, string text, int px, int py, TTF_Font 
 
 void drawButton(Button *pbutton)
 {
-    apply_surface(pbutton->x, pbutton->y, pbutton->sprite, NULL);
+    apply_texture(pbutton->sprite, pbutton->x, pbutton->y, NULL);
+
     Vector2 size = getTextSize(pbutton->text, pbutton->font);
 
     RGBA r;
@@ -39,15 +40,15 @@ void drawButton(Button *pbutton)
     r.a = 255;
 
     //we draw the text on the button's surface
-    // drawText(
-    //   pbutton->text,
-    //   pbutton->x + pbutton->width/2 - size.x/2,
-    //   pbutton->y + pbutton->height/2 - size.y/2 +5,
-    //   pbutton->font,
-    //
-    //   20,
-    //   r
-    // );
+    drawText(
+      pbutton->text,
+      pbutton->x + pbutton->width/2 - size.x/2,
+      pbutton->y + pbutton->height/2 - size.y/2 +5,
+      pbutton->font,
+
+      20,
+      r
+    );
 }
 
 bool buttonEvent(SDL_Event *event, Button *button)

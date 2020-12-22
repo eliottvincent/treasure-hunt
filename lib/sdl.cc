@@ -65,7 +65,7 @@ SDL_Texture *load_image_transparent(string file_path, int r, int g, int b)
   return image;
 }
 
-void apply_surface(int x, int y, SDL_Texture *source, SDL_Rect *clip)
+void apply_texture(SDL_Texture *source, int x, int y, SDL_Rect *clip)
 {
   SDL_Rect offset;
   offset.x = x;
@@ -112,7 +112,7 @@ void drawText(
 
       mes_as_texture = SDL_CreateTextureFromSurface(renderer, mes);
 
-      apply_surface(x, y, mes_as_texture, NULL);
+      apply_texture(mes_as_texture, x, y, NULL);
 
       x += mes->w;
 
@@ -130,7 +130,7 @@ void drawText(
   SDL_SetSurfaceAlphaMod(mes, textColor.a);
   mes_as_texture = SDL_CreateTextureFromSurface(renderer, mes);
 
-  apply_surface(x, y, mes_as_texture, NULL);
+  apply_texture(mes_as_texture, x, y, NULL);
 
   SDL_FreeSurface(mes);
 }

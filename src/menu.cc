@@ -17,10 +17,24 @@ int menu()
 
   // we first load all the assets that are necessary to the menu
   TTF_Font *small            = TTF_OpenFont("assets/font.ttf", 20);
-  SDL_Texture *button_sprite = load_image_transparent("assets/button.png",0,255,255);
+  SDL_Texture *button_sprite = load_image_transparent("assets/button.png", 0, 255, 255);
   SDL_Texture *background    = load_image("assets/background.png");
-  Button play                = createButton(button_sprite, "Jouer", WINDOW_WIDTH/2 - 500/2, WINDOW_HEIGHT-150, small);
-  Button quit                = createButton(button_sprite, "Quitter", WINDOW_WIDTH/2 + 80/2, WINDOW_HEIGHT-150, small);
+
+  Button play                = createButton(
+    button_sprite,
+    "Jouer",
+    WINDOW_WIDTH/2 - 500/2,
+    WINDOW_HEIGHT - 150,
+    small
+  );
+
+  Button quit                = createButton(
+    button_sprite,
+    "Quitter",
+    WINDOW_WIDTH/2 + 80/2,
+    WINDOW_HEIGHT-150,
+    small
+  );
 
   while(!done)
   {

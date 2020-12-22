@@ -158,5 +158,5 @@ void drawPlayer(Player player)
     rect.y = 1;
     rect.w = 60;
     rect.h = 60;
-    apply_surface(x,y, player.sprite, &rect );
+    apply_texture(player.sprite, x, y, &rect);
 }

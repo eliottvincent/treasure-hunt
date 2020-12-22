@@ -52,7 +52,7 @@ SDL_Texture *load_image(string filepath);
 SDL_Texture *load_image_transparent(string filepath, int r, int g , int b);
 
 //Colle une image � l'�cran
-void apply_surface(int x, int y, SDL_Texture *toapply, SDL_Rect *clip);
+void apply_texture(SDL_Texture *toapply, int x, int y, SDL_Rect *clip);
 
 //affiche du texte � l'�cran
 void drawText(string message,int x,int y,TTF_Font *font,int fontSize,RGBA textColor);

@@ -88,7 +88,7 @@ void drawBoard(Board board,TTF_Font *font, SDL_Texture *player1, SDL_Texture *pl
         clip.x = index;
         clip.y = 0, clip.w = 60;
         clip.h = 60;
-        apply_surface(board.combo1->x+24-28, board.combo1->y-134, board.coins, &clip);
+        apply_texture(board.coins, board.combo1->x+24-28, board.combo1->y-134, &clip);
     }
     index = getIndexInSpriteSheet(board.combo2->player->lastCoin);
     if(index>-1)
@@ -96,6 +96,6 @@ void drawBoard(Board board,TTF_Font *font, SDL_Texture *player1, SDL_Texture *pl
         clip.x = index;
         clip.y = 0, clip.w = 60;
         clip.h = 60;
-        apply_surface(board.combo2->x+24-28, board.combo2->y-134, board.coins, &clip);
+        apply_texture(board.coins, board.combo2->x+24-28, board.combo2->y-134, &clip);
     }
 }

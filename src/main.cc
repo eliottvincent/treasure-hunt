@@ -49,32 +49,32 @@ int main()
     SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
   );
 
-  renderer = SDL_CreateRenderer(window, -1, 0);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
   while(!quit)
   {
     switch(gamestate)
     {
       case 0:
-        printf("0");
         gamestate = menu();
 
         break;
+
       case 1:
-        printf("1");
         // gamestate = game();
 
         break;
+
       case 2:
-        printf("2");
         quit = true;
 
         break;
     }
   }
 
-  // Close and destroy the window
+  // Destroy the window and the renderer
   SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(renderer);
 
   // Clean up
   IMG_Quit();
