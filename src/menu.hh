@@ -10,15 +10,17 @@
 #ifndef menu_H
 #define menu_H
 
-#include <SDL2/SDL.h>
-#include <cstdlib>
-#include <iostream>
-#include <string>
-#include "../lib/sdlFunctions.hh"
-#include "plate.hh"
+// #include <SDL2/SDL.h>
+// #include <cstdlib>
+// #include <iostream>
+// #include <string>
+// #include "../lib/sdl.hh"
+// #include "plate.hh"
 #include "treasureHunt.hh"
 #include "button.hh"
-#include "player.hh"
+// #include "player.hh"
+
+extern SDL_Renderer *renderer;
 
 /**************** Name of the function **********************
 ∗ menu()			                                        *
@@ -30,7 +32,7 @@
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The gamestate                                             *
 ************************************************************/
-int menu(SDL_Window *screen);
+int menu();
 
 /**************** Name of the function **********************
 ∗ menuEvents()			                                    *
@@ -53,6 +55,6 @@ int menuEvents(Button *play, Button *quit);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The menu                                                  *
 ************************************************************/
-void drawMenu(SDL_Window *screen, SDL_Surface *background, Button *play, Button *quit);
+void drawMenu(SDL_Texture *background, Button *play, Button *quit);
 
 #endif

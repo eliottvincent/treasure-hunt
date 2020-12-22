@@ -7,11 +7,11 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
- #ifndef BUTTON_H
+#ifndef BUTTON_H
 #define BUTTON_H
 
 #include <SDL2/SDL.h>
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 #include <cstdlib>
 #include <string>
 
@@ -30,9 +30,11 @@ struct Button
     int y;
     int width;
     int height;
-    SDL_Surface *sprite;
+
+    SDL_Texture *sprite;
     TTF_Font *font;
-    std::string text;
+
+    string text;
 };
 
 /**************** Name of the function **********************
@@ -45,7 +47,7 @@ struct Button
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ A button                                                   *
 ************************************************************/
-Button createButton(SDL_Surface *psprite, std::string text, int px, int yp, TTF_Font *font);
+Button createButton(SDL_Texture *psprite, string text, int px, int yp, TTF_Font *font);
 
 /**************** Name of the function **********************
 ∗ drawButton						                        *
@@ -56,7 +58,7 @@ Button createButton(SDL_Surface *psprite, std::string text, int px, int yp, TTF_
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ A button                                                  *
 ************************************************************/
-void drawButton(Button *pbutton, SDL_Window *screen);
+void drawButton(Button *pbutton);
 
 /**************** Name of the function **********************
 ∗ buttonEvent   			                                *

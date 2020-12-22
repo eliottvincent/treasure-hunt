@@ -12,11 +12,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 #include "treasureHunt.hh"
-#include "game.hh"
-#include "menu.hh"
-#include "gain.hh"
+// #include "game.cc"
+#include "menu.cc"
 
 
 /**************** Name of the function **********************
@@ -36,18 +35,21 @@ int main()
   srand(time(NULL));
 
   SDL_Init(SDL_INIT_EVERYTHING);
+  IMG_Init(IMG_INIT_PNG);
   TTF_Init();
 
-  SDL_Window *window = SDL_CreateWindow(
+  window = SDL_CreateWindow(
     "My Game Window",
 
-    SDL_WINDOWPOS_UNDEFINED,
-    SDL_WINDOWPOS_UNDEFINED,
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
 
     WINDOW_WIDTH, WINDOW_HEIGHT,
 
     SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
   );
+
+  renderer = SDL_CreateRenderer(window, -1, 0);
 
   while(!quit)
   {
@@ -55,12 +57,12 @@ int main()
     {
       case 0:
         printf("0");
-        gamestate = menu(window);
+        gamestate = menu();
 
         break;
       case 1:
-        // printf("1");
-        // gamestate = game(window);
+        printf("1");
+        // gamestate = game();
 
         break;
       case 2:
@@ -75,6 +77,7 @@ int main()
   SDL_DestroyWindow(window);
 
   // Clean up
+  IMG_Quit();
   TTF_Quit();
   SDL_Quit();
 

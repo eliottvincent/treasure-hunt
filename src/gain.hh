@@ -15,9 +15,12 @@
 #include <string>
 #include <climits>
 #include "treasureHunt.hh"
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 #include "button.hh"
 #include "player.hh"
+
+extern SDL_Renderer *renderer;
+
 
 /**************** Name of the function **********************
 ∗ gain						                                *
@@ -28,7 +31,7 @@
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The "gain" screen                                         *
 ************************************************************/
-int gain(SDL_Window *screen, Player *winner);
+int gain(Player *winner);
 
 /**************** Name of the function **********************
 ∗ gainEvents						                        *

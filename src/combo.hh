@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "player.hh"
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 
 /**************** Name of the strcture **********************
 ∗ Combo						                                *
@@ -53,6 +53,6 @@ Combo createCombo(int x, int y, Player *player);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The Combo                                                   *
 ************************************************************/
-void drawCombo(Combo combo, TTF_Font *font,  SDL_Window *screen);
+void drawCombo(Combo combo, TTF_Font *font);
 
 #endif

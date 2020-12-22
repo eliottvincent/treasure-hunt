@@ -11,15 +11,15 @@
 
 using namespace std;
 
-int gain(SDL_Window *screen, Player *winner)
+int gain(Player *winner)
 {
-    SDL_Surface *button_sprite;
+    SDL_Texture *button_sprite;
     TTF_Font *big, *small;
 
     //we load the necessary assets
     big = TTF_OpenFont("assets/font.ttf", 50);
     small = TTF_OpenFont("assets/font.ttf", 20);
-    button_sprite = LoadImageTransparent("assets/button.png", 0, 255, 255);
+    button_sprite = load_image_transparent("assets/button.png", 0, 255, 255);
 
     bool done = false;
     int gamestate = 2;
@@ -46,17 +46,17 @@ int gain(SDL_Window *screen, Player *winner)
         SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 231, 208, 14));
 
         //we draw the buttons
-        drawButton(&replay, screen);
-        drawButton(&quit, screen);
+        drawButton(&replay);
+        drawButton(&quit);
 
         //we draw the text
         RGBA white;
         white.r = 255; white.g = 255; white.b = 255; white.a = 255;
         string msg = "Le joueur " + convertToString(winner->id) + " a gagne !";
         Vector2 size = getTextSize(msg, big);
-        drawText(msg, WINDOW_WIDTH/2 - size.x /2-25, 100, big, 20, white, screen);
+        drawText(msg, WINDOW_WIDTH/2 - size.x /2-25, 100, big, 20, white);
 
-        SDL_Flip(screen);
+        SDL_RenderPresent(renderer);
         manageFrames(startTicks);
     }
     return gamestate;

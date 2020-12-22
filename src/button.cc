@@ -8,31 +8,46 @@
  *********************************************************************************************/
 
 #include "button.hh"
+#include "../lib/sdl.cc"
 
 using namespace std;
 
-Button createButton(SDL_Surface *psurface, std::string text, int px, int py, TTF_Font *font)
+Button createButton(SDL_Texture *texture, string text, int px, int py, TTF_Font *font)
 {
     Button b;
-    b.sprite = psurface;
+
+    b.sprite = texture;
     b.x = px;
     b.y = py;
     b.width = 200;
     b.height = 56;
     b.font = font;
     b.text = text;
+
     return b;
 }
 
-void drawButton(Button *pbutton, SDL_Window *screen)
+void drawButton(Button *pbutton)
 {
-    applySurface(pbutton->x, pbutton->y, pbutton->sprite, screen, NULL);
+    apply_surface(pbutton->x, pbutton->y, pbutton->sprite, NULL);
     Vector2 size = getTextSize(pbutton->text, pbutton->font);
+
     RGBA r;
-    r.b = 255;r.g=255; r.r=255; r.a = 255;
+    r.b = 255;
+    r.g = 255;
+    r.r = 255;
+    r.a = 255;
 
     //we draw the text on the button's surface
-    drawText(pbutton->text, pbutton->x + pbutton->width/2 - size.x/2, pbutton->y + pbutton->height/2 - size.y/2 +5, pbutton->font, 20,r,screen);
+    // drawText(
+    //   pbutton->text,
+    //   pbutton->x + pbutton->width/2 - size.x/2,
+    //   pbutton->y + pbutton->height/2 - size.y/2 +5,
+    //   pbutton->font,
+    //
+    //   20,
+    //   r
+    // );
 }
 
 bool buttonEvent(SDL_Event *event, Button *button)

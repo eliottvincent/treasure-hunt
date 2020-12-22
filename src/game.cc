@@ -8,20 +8,21 @@
  *********************************************************************************************/
 
 #include "game.hh"
+#include "board.cc"
 
 using namespace std;
 
-int game(SDL_Window *screen)
+int game()
 {
     //we load the necessary assets
     TTF_Font *big, *small;
-    SDL_Surface *player1_sprite, *player2_sprite, *coins;
+    SDL_Texture *player1_sprite, *player2_sprite, *coins;
 
     big = TTF_OpenFont("assets/font.ttf", 50);
     small = TTF_OpenFont("assets/font.ttf", 25);
-    player1_sprite = LoadImageTransparent("assets/player1.png",0,255,255);
-    player2_sprite = LoadImageTransparent("assets/player2.png",0,255,255);
-    coins = LoadImageTransparent("assets/coins.bmp",0,255,255);
+    player1_sprite = load_image_transparent("assets/player1.png",0,255,255);
+    player2_sprite = load_image_transparent("assets/player2.png",0,255,255);
+    coins = load_image_transparent("assets/coins.bmp",0,255,255);
 
     //we create the logicals vars of the game
     bool done = false;
@@ -84,7 +85,7 @@ int game(SDL_Window *screen)
         if(winner != 0)
         {
             done = true;
-            gamestate = gain(screen, &players[winner-1]);
+            gamestate = gain(&players[winner-1]);
         }
 
         //we clear the screen
@@ -93,19 +94,23 @@ int game(SDL_Window *screen)
         rect.y = 0;
         rect.w = WINDOW_WIDTH;
         rect.h = WINDOW_HEIGHT;
-        SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 231, 208, 14));
+
+        SDL_RenderClear(renderer);
+
+        SDL_SetRenderDrawColor(renderer, 231, 208, 14, SDL_ALPHA_OPAQUE);
+        SDL_RenderFillRect(renderer, &rect);
 
         //we draw the plate with the coins
-        drawPlate(tiles, coins, screen);
+        drawPlate(tiles, coins);
 
         //we draw the players
-        drawPlayer(players[current_turn], screen);
+        drawPlayer(players[current_turn]);
 
         //we draw the board
-        drawBoard(board, small, screen, player1_sprite, player2_sprite, current_turn+1);
+        drawBoard(board, small, player1_sprite, player2_sprite, current_turn+1);
 
         //we refresh the screen
-        SDL_Flip(screen);
+        SDL_RenderPresent(renderer);
 
         if(!done)
             manageFrames(startTicks);

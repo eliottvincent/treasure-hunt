@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 #include <climits>
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 #include "plate.hh"
 
 /**************** Name of the structure *********************
@@ -28,7 +28,7 @@
 struct Player
 {
     int id;
-    SDL_Surface *sprite;
+    SDL_Texture *sprite;
     Vector2 position;
     Vector2 coords;
     Vector2 velocity;
@@ -50,7 +50,7 @@ struct Player
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The player                                                *
 ************************************************************/
-Player createPlayer(int id, Vector2 position, SDL_Surface *sprite);
+Player createPlayer(int id, Vector2 position, SDL_Texture *sprite);
 
 /**************** Name of the function **********************
 ∗ deletePayer() 			                                *
@@ -105,7 +105,7 @@ void movePlayer(Player &player, Vector2 destination, Map tiles);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ Nothing                                                   *
 ************************************************************/
-void drawPlayer(Player player, SDL_Window *screen);
+void drawPlayer(Player player);
 
 /**************** Name of the function **********************
 ∗ getCoinPlayer() 			                                *

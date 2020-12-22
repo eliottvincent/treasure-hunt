@@ -14,7 +14,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include "combo.hh"
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 
 /**************** Name of the structure *********************
 ∗ Board						                                *
@@ -33,10 +33,10 @@ struct Board
     float frame;
     Combo *combo1;
     Combo *combo2;
-    SDL_Surface *player_1;
-    SDL_Surface *player_2;
-    SDL_Surface *background;
-    SDL_Surface *coins;
+    SDL_Texture *player_1;
+    SDL_Texture *player_2;
+    SDL_Texture *background;
+    SDL_Texture *coins;
 };
 
 /**************** Name of the function **********************
@@ -60,7 +60,7 @@ Board buildBoard(int x, int y, Combo *combo1, Combo *combo2);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ All the surfaces created                                  *
 ************************************************************/
-void loadBoard(Board &board, SDL_Surface *player_1, SDL_Surface *player_2, SDL_Surface *coins, SDL_Surface  *background);
+void loadBoard(Board &board, SDL_Texture *player_1, SDL_Texture *player_2, SDL_Texture *coins, SDL_Texture  *background);
 
 /**************** Name of the function **********************
 ∗ drawBoard()				                                *
@@ -71,6 +71,6 @@ void loadBoard(Board &board, SDL_Surface *player_1, SDL_Surface *player_2, SDL_S
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The board                                                 *
 ************************************************************/
-void drawBoard(Board board,TTF_Font *font, SDL_Window *screen, SDL_Surface *player1, SDL_Surface *player2, int currentlyPlaying);
+void drawBoard(Board board,TTF_Font *font, SDL_Texture *player1, SDL_Texture *player2, int currentlyPlaying);
 
 #endif

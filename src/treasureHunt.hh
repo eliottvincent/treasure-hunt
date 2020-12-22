@@ -12,6 +12,9 @@
 
 #include <string>
 
+SDL_Window *window;
+SDL_Renderer *renderer;
+
 //size of the plate
 const int PLATE_SIZE = 7;
 

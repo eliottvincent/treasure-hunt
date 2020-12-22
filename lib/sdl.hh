@@ -1,14 +1,14 @@
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: sdlFunctions.h
+ * File: sdl.hh
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent, Nicholas Journet
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#ifndef SDLFUNCTIONS_H
-#define SDLFUNCTIONS_H
+#ifndef SDL_H
+#define SDL_H
 
 #include <stdlib.h>
 #include <string>
@@ -19,6 +19,9 @@
 #include <iostream>
 #include <math.h>
 
+using namespace std;
+
+extern SDL_Renderer *renderer;
 
 struct Rectangle
 {
@@ -42,23 +45,23 @@ struct RGBA
     int a;
 };
 
-//Charge une image
-SDL_Surface *load_image(std::string filename);
+// Loads an image
+SDL_Texture *load_image(string filepath);
 
 //Charge une image avec la transparence
-SDL_Surface *LoadImageTransparent(std::string filename, int r, int g , int b);
+SDL_Texture *load_image_transparent(string filepath, int r, int g , int b);
 
 //Colle une image � l'�cran
-void applySurface(int x,int y,SDL_Surface *toapply, SDL_Surface *onapply, SDL_Rect* clip );
+void apply_surface(int x, int y, SDL_Texture *toapply, SDL_Rect *clip);
 
 //affiche du texte � l'�cran
-void drawText(std::string message,int x,int y,TTF_Font *font,int fontSize,RGBA textColor,SDL_Surface* &screen);
+void drawText(string message,int x,int y,TTF_Font *font,int fontSize,RGBA textColor);
 
-Vector2 getTextSize(std::string text, TTF_Font *font);
+Vector2 getTextSize(string text, TTF_Font *font);
 
 int randInt(int mi, int ma);
 
 void manageFrames(int startTicks);
 
-std::string convertToString(int e);
+string convertToString(int e);
 #endif

@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../lib/sdlFunctions.hh"
+#include "../lib/sdl.hh"
 #include "plate.hh"
 #include "treasureHunt.hh"
 #include "button.hh"
@@ -22,6 +22,8 @@
 #include "combo.hh"
 #include "board.hh"
 #include "gain.hh"
+
+extern SDL_Renderer *renderer;
 
 /**************** Name of the function **********************
 ∗ game						                                *
@@ -32,7 +34,7 @@
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The gamestate                                             *
 ************************************************************/
-int game(SDL_Window *screen);
+int game();
 
 /**************** Name of the function **********************
 ∗ manageClick						                        *

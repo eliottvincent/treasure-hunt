@@ -11,7 +11,7 @@
 
 using namespace std;
 
-Player createPlayer(int id, Vector2 coords, SDL_Surface *sprite)
+Player createPlayer(int id, Vector2 coords, SDL_Texture *sprite)
 {
     Player p;
     p.id = id;
@@ -148,7 +148,7 @@ bool getCoinPlayer(Player &player, Map tiles)
     return true;
 }
 
-void drawPlayer(Player player, SDL_Window *screen)
+void drawPlayer(Player player)
 {
     int x = (int)player.position.x;
     int y = (int)player.position.y;
@@ -158,5 +158,5 @@ void drawPlayer(Player player, SDL_Window *screen)
     rect.y = 1;
     rect.w = 60;
     rect.h = 60;
-    applySurface(x,y, player.sprite, screen, &rect );
+    apply_surface(x,y, player.sprite, &rect );
 }
