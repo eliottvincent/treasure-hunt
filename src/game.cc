@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int game(SDL_Surface *screen)
+int game(SDL_Window *screen)
 {
     //we load the necessary assets
     TTF_Font *big, *small;

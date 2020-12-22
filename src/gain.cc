@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int gain(SDL_Surface *screen, Player *winner)
+int gain(SDL_Window *screen, Player *winner)
 {
     SDL_Surface *button_sprite;
     TTF_Font *big, *small;

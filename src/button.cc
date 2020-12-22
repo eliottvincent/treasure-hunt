@@ -24,7 +24,7 @@ Button createButton(SDL_Surface *psurface, std::string text, int px, int py, TTF
     return b;
 }
 
-void drawButton(Button *pbutton, SDL_Surface *screen)
+void drawButton(Button *pbutton, SDL_Window *screen)
 {
     applySurface(pbutton->x, pbutton->y, pbutton->sprite, screen, NULL);
     Vector2 size = getTextSize(pbutton->text, pbutton->font);

@@ -14,7 +14,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "treasureHunt.h"
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 
 /**************** Name of the type **************************
 ∗ Coin          			                                *
@@ -86,6 +86,6 @@ int getIndexInSpriteSheet(int value);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The plate                                                *
 ************************************************************/
-void drawPlate(Map myplate, SDL_Surface *coins, SDL_Surface *screen);
+void drawPlate(Map myplate, SDL_Surface *coins, SDL_Window *screen);
 
 #endif

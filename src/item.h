@@ -10,7 +10,7 @@
 #ifndef item
 #define item
 
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 
 /**************** Name of the structure *********************
 ∗ Item						                                *

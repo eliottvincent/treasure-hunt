@@ -38,7 +38,7 @@ void loadBoard(Board &board, SDL_Surface *player1, SDL_Surface *player2, SDL_Sur
     board.coins = coins;
 }
 
-void drawBoard(Board board,TTF_Font *font,  SDL_Surface *screen, SDL_Surface *player1, SDL_Surface *player2, int currentlyPlaying)
+void drawBoard(Board board,TTF_Font *font,  SDL_Window *screen, SDL_Surface *player1, SDL_Surface *player2, int currentlyPlaying)
 {
     //we draw the two combos
     drawCombo(*board.combo1, font, screen);

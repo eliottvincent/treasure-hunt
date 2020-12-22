@@ -148,7 +148,7 @@ bool getCoinPlayer(Player &player, Map tiles)
     return true;
 }
 
-void drawPlayer(Player player, SDL_Surface *screen)
+void drawPlayer(Player player, SDL_Window *screen)
 {
     int x = (int)player.position.x;
     int y = (int)player.position.y;

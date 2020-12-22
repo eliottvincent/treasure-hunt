@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 #include <climits>
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 #include "plate.h"
 
 /**************** Name of the structure *********************
@@ -105,7 +105,7 @@ void movePlayer(Player &player, Vector2 destination, Map tiles);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ Nothing                                                   *
 ************************************************************/
-void drawPlayer(Player player, SDL_Surface *screen);
+void drawPlayer(Player player, SDL_Window *screen);
 
 /**************** Name of the function **********************
 ∗ getCoinPlayer() 			                                *

@@ -15,7 +15,7 @@
 #include <string>
 #include <climits>
 #include "treasureHunt.h"
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 #include "button.h"
 #include "player.h"
 
@@ -28,7 +28,7 @@
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The "gain" screen                                         *
 ************************************************************/
-int gain(SDL_Surface *screen, Player *winner);
+int gain(SDL_Window *screen, Player *winner);
 
 /**************** Name of the function **********************
 ∗ gainEvents						                        *

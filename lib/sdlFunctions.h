@@ -19,8 +19,6 @@
 #include <iostream>
 #include <math.h>
 
-#include "treasureHunt.h"
-
 
 struct Rectangle
 {

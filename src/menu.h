@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 #include "plate.h"
 #include "treasureHunt.h"
 #include "button.h"
@@ -30,7 +30,7 @@
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The gamestate                                             *
 ************************************************************/
-int menu(SDL_Surface *screen);
+int menu(SDL_Window *screen);
 
 /**************** Name of the function **********************
 ∗ menuEvents()			                                    *
@@ -53,6 +53,6 @@ int menuEvents(Button *play, Button *quit);
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ The menu                                                  *
 ************************************************************/
-void drawMenu(SDL_Surface *screen, SDL_Surface *background, Button *play, Button *quit);
+void drawMenu(SDL_Window *screen, SDL_Surface *background, Button *play, Button *quit);
 
 #endif

@@ -20,7 +20,7 @@ Combo createCombo(int x, int y, Player *player)
      return j;
  }
 
-void drawCombo(Combo combo, TTF_Font *font, SDL_Surface *screen)
+void drawCombo(Combo combo, TTF_Font *font, SDL_Window *screen)
 {
     int d = 10*pow(2, (combo.player->combo-1));
     if(combo.player->combo == 0)

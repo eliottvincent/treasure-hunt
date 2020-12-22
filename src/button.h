@@ -1,58 +1,72 @@
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: combo.h
+ * File: button.h
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#ifndef COMBO_H
-#define COMBO_H
+ #ifndef BUTTON_H
+#define BUTTON_H
 
 #include <SDL2/SDL.h>
-#include <iostream>
-#include "player.h"
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
+#include <cstdlib>
+#include <string>
 
-/**************** Name of the strcture **********************
-∗ Combo						                                *
+/**************** Name of the structure *********************
+∗ Button						                            *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It defines the parameters of the combo        	        *
+∗ It defines the parameters of the buttons        	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
 ∗ Nothing                                                   *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ Nothing                                                   *
 ************************************************************/
-struct Combo
+struct Button
 {
     int x;
     int y;
-    float frame;
-    Player *player;
-    int lastCombo;
+    int width;
+    int height;
+    SDL_Surface *sprite;
+    TTF_Font *font;
+    std::string text;
 };
 
 /**************** Name of the function **********************
-∗ createCombo						                        *
+∗ createButton  			                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It creates the combo                            	        *
+∗ It builds a button with the parameters set by the	        *
+* strcture "Button"                                         *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The coordinates, the player (player1 or player2)          *
+∗ The surface, a text string, coordinates, font name        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The combo                                                   *
+∗ A button                                                   *
 ************************************************************/
-Combo createCombo(int x, int y, Player *player);
+Button createButton(SDL_Surface *psprite, std::string text, int px, int yp, TTF_Font *font);
 
 /**************** Name of the function **********************
-∗ drawCombo						                            *
+∗ drawButton						                        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It draws the combo on the screen's surface       	        *
+∗ It draws a button        	                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The created combo, the font, the screen's surface         *
+∗ The button's surface, the screen's surface                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The Combo                                                   *
+∗ A button                                                  *
 ************************************************************/
-void drawCombo(Combo combo, TTF_Font *font,  SDL_Surface *screen);
+void drawButton(Button *pbutton, SDL_Window *screen);
+
+/**************** Name of the function **********************
+∗ buttonEvent   			                                *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
+∗ It manages the mouse's events on the button     	        *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
+∗ A SDL event, the button's surface                         *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
+∗ a bool                                                    *
+************************************************************/
+bool buttonEvent(SDL_Event *event, Button *button);
 
 #endif

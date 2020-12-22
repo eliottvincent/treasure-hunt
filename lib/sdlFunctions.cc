@@ -42,11 +42,11 @@ SDL_Surface *load_image(std::string filename)
 
 // -- loadImageTransparent ---------------------
 // chargement d'une image
-// * paramètres entrées :
+// * paramï¿½tres entrï¿½es :
 // - "filename" : nom de l'image
 // - "r,g,b"    : couleur de la ColorKey; cette
 //   couleur devient transparente !
-// * paramètre de sortie : SDL_Surface contenant
+// * paramï¿½tre de sortie : SDL_Surface contenant
 //   l'image.
 // ----------------------------------------------
 SDL_Surface * LoadImageTransparent(string filename, int r, int g, int b)

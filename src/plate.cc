@@ -101,7 +101,7 @@ int getIndexInSpriteSheet(int value)
     return index;
 }
 
-void drawPlate(Map myplate, SDL_Surface *coins, SDL_Surface *screen)
+void drawPlate(Map myplate, SDL_Surface *coins, SDL_Window *screen)
 {
     for(int i = 0; i< PLATE_SIZE; i++)
     {

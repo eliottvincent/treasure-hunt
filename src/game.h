@@ -1,76 +1,70 @@
+#ifndef game_H
 /********************************************************************************************
  * Project: Treasure Hunt
- * File: board.h
+ * File: game.h
  * ------------------------------------------------------------------------------------------
  * Authors: Pierre Lethuillier, Eliott Vincent
  * License: This work is licensed under the Creative Commons
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
-#ifndef BOARD_H
-#define BOARD_H
-
+#define game_H
 
 #include <SDL2/SDL.h>
+#include <cstdlib>
+#include <iostream>
 #include <string>
+#include "../lib/sdlFunctions.h"
+#include "plate.h"
+#include "treasureHunt.h"
+#include "button.h"
+#include "player.h"
 #include "combo.h"
-#include "sdlFunctions.h"
+#include "board.h"
+#include "gain.h"
 
-/**************** Name of the structure *********************
-∗ Board						                                *
+/**************** Name of the function **********************
+∗ game						                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It defines the parameters of the board        	        *
+∗ It loads the assets and creates the game's logic 	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
+∗ The screen's surface                                      *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
+∗ The gamestate                                             *
+************************************************************/
+int game(SDL_Window *screen);
+
+/**************** Name of the function **********************
+∗ manageClick						                        *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
+∗ It manages the clicks ers of the board        	        *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
+∗ The SDL events, the players                               *
+∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
 ∗ Nothing                                                   *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ Nothing                                                   *
 ************************************************************/
-
-struct Board
-{
-    int x;
-    int y;
-    float frame;
-    Combo *combo1;
-    Combo *combo2;
-    SDL_Surface *player_1;
-    SDL_Surface *player_2;
-    SDL_Surface *background;
-    SDL_Surface *coins;
-};
+void manageClick(SDL_Event &event, Player players[], int &current_turn, Map tiles);
 
 /**************** Name of the function **********************
-∗ buildboard()						                        *
+∗ getOtherPlayer    		                                *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It builds the board, with the parameters of the structure *
-* "Board"                                                   *
+∗ It checks if the players need to turn or not     	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ x, y, both combos                                         *
+∗ The players                                               *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ i, the index of the frame                                 *
+∗ The turn of the player                                    *
 ************************************************************/
-Board buildBoard(int x, int y, Combo *combo1, Combo *combo2);
+Player getOtherPlayer(Player players[], int currentTurn);
 
 /**************** Name of the function **********************
-∗ laodBoard()					                            *
+∗ doesAPlayerWon()		                                    *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It loads the board (players, coins, etc...)      	        *
+∗ It checks if a player won                        	        *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The structure "Board", all the surfaces needed            *
+∗ The player, the plate                                     *
 ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ All the surfaces created                                  *
+∗ The winner                                                *
 ************************************************************/
-void loadBoard(Board &board, SDL_Surface *player_1, SDL_Surface *player_2, SDL_Surface *coins, SDL_Surface  *background);
-
-/**************** Name of the function **********************
-∗ drawBoard()				                                *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It draws the board on the screen               	        *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The font, all the surfaces created by loadBoard()         *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The board                                                 *
-************************************************************/
-void drawBoard(Board board,TTF_Font *font, SDL_Surface *screen, SDL_Surface *player1, SDL_Surface *player2, int currentlyPlaying);
+int doesAPlayerWon(Player players[], Map tiles);
 
 #endif

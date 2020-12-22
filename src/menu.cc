@@ -9,35 +9,39 @@
 
  #include "menu.h"
 
-int menu(SDL_Surface *screen)
+int menu(SDL_Window *screen)
 {
-    //we first load all the assets that are necessary to the menu
-    TTF_Font *small = TTF_OpenFont("assets/font.ttf", 20);
-    SDL_Surface *button_sprite = LoadImageTransparent("assets/button.png",0,255,255);
-    SDL_Surface *background = load_image("assets/background.png");
+  bool done     = false;
+  int gamestate = 0;
 
-    Button play = createButton(button_sprite, "Jouer", SCREEN_WIDTH/2 - 500/2, SCREEN_HEIGHT-150, small);
-    Button quit = createButton(button_sprite, "Quitter", SCREEN_WIDTH/2 + 80/2, SCREEN_HEIGHT-150, small);
+  // we first load all the assets that are necessary to the menu
+  TTF_Font *small            = TTF_OpenFont("assets/font.ttf", 20);
+  SDL_Surface *button_sprite = LoadImageTransparent("assets/button.png",0,255,255);
+  SDL_Surface *background    = load_image("assets/background.png");
 
-    bool done=false;
-    int gamestate = 0;
+  Button play = createButton(button_sprite, "Jouer", SCREEN_WIDTH/2 - 500/2, SCREEN_HEIGHT-150, small);
+  Button quit = createButton(button_sprite, "Quitter", SCREEN_WIDTH/2 + 80/2, SCREEN_HEIGHT-150, small);
 
-    while(!done)
-    {
-        int startTicks = SDL_GetTicks();
+  while(!done)
+  {
+      int startTicks = SDL_GetTicks();
 
-        gamestate = menuEvents(&play, &quit);
+      gamestate = menuEvents(&play, &quit);
 
-        if(gamestate != 0)
-            done = true;
+      if(gamestate != 0)
+      {
+        done = true;
+      }
 
-        drawMenu(screen, background, &play, &quit);
-        SDL_Flip(screen);
+      drawMenu(screen, background, &play, &quit);
+      SDL_Flip(screen);
 
-        manageFrames(startTicks);
-    }
-    SDL_FreeSurface(button_sprite);
-    return gamestate;
+      manageFrames(startTicks);
+  }
+
+  SDL_FreeSurface(button_sprite);
+
+  return gamestate;
 }
 
 int menuEvents(Button *play, Button *quit)
@@ -66,7 +70,7 @@ int menuEvents(Button *play, Button *quit)
     return gamestate;
 }
 
-void drawMenu(SDL_Surface *screen, SDL_Surface *background, Button *play, Button *quit)
+void drawMenu(SDL_Window *screen, SDL_Surface *background, Button *play, Button *quit)
 {
     //we draw the background
     SDL_Rect backgroundPosition;

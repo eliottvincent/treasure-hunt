@@ -9,7 +9,7 @@
 
 #include <SDL2/SDL.h>
 #include "treasureHunt.h"
-#include "sdlFunctions.h"
+#include "../lib/sdlFunctions.h"
 #include "game.h"
 #include "menu.h"
 #include "gain.h"
@@ -26,31 +26,49 @@
 ************************************************************/
 int main()
 {
-    SDL_Surface *screen;
-    srand(time(NULL));
-    SDL_Init(SDL_INIT_EVERYTHING);
-    TTF_Init();
-    screen=SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE);
+  int gamestate = 0;
+  bool quit     = false;
 
-    int gamestate = 0;
-    bool quit=false;
+  srand(time(NULL));
 
-    while(!quit)
+  SDL_Init(SDL_INIT_EVERYTHING);
+  TTF_Init();
+
+  SDL_Window *screen = SDL_CreateWindow(
+    "My Game Window",
+
+    SDL_WINDOWPOS_UNDEFINED,
+    SDL_WINDOWPOS_UNDEFINED,
+
+    SCREEN_WIDTH, SCREEN_HEIGHT,
+
+    SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL
+  );
+
+  while(!quit)
+  {
+    switch(gamestate)
     {
-        switch(gamestate)
-        {
-        case 0:
-            gamestate = menu(screen);
-            break;
-        case 1:
-            gamestate = game(screen);
-            break;
-        case 2:
-            quit=true;
-            break;
-        }
+      case 0:
+        printf("0");
+        gamestate = menu(screen);
+
+        break;
+      case 1:
+        // printf("1");
+        // gamestate = game(screen);
+
+        break;
+      case 2:
+        printf("2");
+        quit = true;
+
+        break;
     }
-    TTF_Quit();
-    SDL_Quit();
-    return 0;
+  }
+
+  TTF_Quit();
+  SDL_Quit();
+
+  return 0;
 }
