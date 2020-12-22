@@ -24,8 +24,8 @@ int gain(SDL_Window *screen, Player *winner)
     bool done = false;
     int gamestate = 2;
 
-    Button replay = createButton(button_sprite,"Rejouer", 640/2-100,SCREEN_HEIGHT-130,small);
-    Button quit = createButton(button_sprite,"Quitter", 640/2-100,SCREEN_HEIGHT-70,small);
+    Button replay = createButton(button_sprite,"Rejouer", 640/2-100,WINDOW_HEIGHT-130,small);
+    Button quit = createButton(button_sprite,"Quitter", 640/2-100,WINDOW_HEIGHT-70,small);
 
     while(!done)
     {
@@ -41,8 +41,8 @@ int gain(SDL_Window *screen, Player *winner)
         SDL_Rect  rect;
         rect.x = 0;
         rect.y = 0;
-        rect.w = SCREEN_WIDTH;
-        rect.h = SCREEN_HEIGHT;
+        rect.w = WINDOW_WIDTH;
+        rect.h = WINDOW_HEIGHT;
         SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 231, 208, 14));
 
         //we draw the buttons
@@ -54,7 +54,7 @@ int gain(SDL_Window *screen, Player *winner)
         white.r = 255; white.g = 255; white.b = 255; white.a = 255;
         string msg = "Le joueur " + convertToString(winner->id) + " a gagne !";
         Vector2 size = getTextSize(msg, big);
-        drawText(msg, SCREEN_WIDTH/2 - size.x /2-25, 100, big, 20, white, screen);
+        drawText(msg, WINDOW_WIDTH/2 - size.x /2-25, 100, big, 20, white, screen);
 
         SDL_Flip(screen);
         manageFrames(startTicks);

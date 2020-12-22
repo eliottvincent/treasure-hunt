@@ -19,8 +19,8 @@ const int PLATE_SIZE = 7;
 const int FPS = 30;
 
 //size of the screen
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 420;
+const int WINDOW_WIDTH = 640;
+const int WINDOW_HEIGHT = 420;
 
 //the values of the coins
 const int P1 = 100;

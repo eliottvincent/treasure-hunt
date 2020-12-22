@@ -91,8 +91,8 @@ int game(SDL_Window *screen)
         SDL_Rect  rect;
         rect.x = 0;
         rect.y = 0;
-        rect.w = SCREEN_WIDTH;
-        rect.h = SCREEN_HEIGHT;
+        rect.w = WINDOW_WIDTH;
+        rect.h = WINDOW_HEIGHT;
         SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 231, 208, 14));
 
         //we draw the plate with the coins

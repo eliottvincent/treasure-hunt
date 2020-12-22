@@ -12,34 +12,34 @@
 int menu(SDL_Window *screen)
 {
   bool done     = false;
-  // int gamestate = 0;
-  //
-  // // we first load all the assets that are necessary to the menu
-  // TTF_Font *small            = TTF_OpenFont("assets/font.ttf", 20);
-  // SDL_Surface *button_sprite = LoadImageTransparent("assets/button.png",0,255,255);
-  // SDL_Surface *background    = load_image("assets/background.png");
-  //
-  // Button play = createButton(button_sprite, "Jouer", SCREEN_WIDTH/2 - 500/2, SCREEN_HEIGHT-150, small);
-  // Button quit = createButton(button_sprite, "Quitter", SCREEN_WIDTH/2 + 80/2, SCREEN_HEIGHT-150, small);
-  //
-  // while(!done)
-  // {
-  //     int startTicks = SDL_GetTicks();
-  //
-  //     gamestate = menuEvents(&play, &quit);
-  //
-  //     if(gamestate != 0)
-  //     {
-  //       done = true;
-  //     }
-  //
-  //     drawMenu(screen, background, &play, &quit);
-  //     SDL_Flip(screen);
-  //
-  //     manageFrames(startTicks);
-  // }
-  //
-  // SDL_FreeSurface(button_sprite);
+  int gamestate = 0;
+
+  // we first load all the assets that are necessary to the menu
+  TTF_Font *small            = TTF_OpenFont("assets/font.ttf", 20);
+  SDL_Surface *button_sprite = LoadImageTransparent("assets/button.png",0,255,255);
+  SDL_Surface *background    = load_image("assets/background.png");
+
+  Button play = createButton(button_sprite, "Jouer", WINDOW_WIDTH/2 - 500/2, WINDOW_HEIGHT-150, small);
+  Button quit = createButton(button_sprite, "Quitter", WINDOW_WIDTH/2 + 80/2, WINDOW_HEIGHT-150, small);
+
+  while(!done)
+  {
+      int startTicks = SDL_GetTicks();
+
+      gamestate = menuEvents(&play, &quit);
+
+      if(gamestate != 0)
+      {
+        done = true;
+      }
+
+      drawMenu(screen, background, &play, &quit);
+      SDL_Flip(screen);
+
+      manageFrames(startTicks);
+  }
+
+  SDL_FreeSurface(button_sprite);
 
   return gamestate;
 }

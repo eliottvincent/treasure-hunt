@@ -7,13 +7,17 @@
  *          Attribution-NonCommercial-ShareAlike 4.0 International License.
  *********************************************************************************************/
 
+#include <cstdlib>
+#include <stdlib.h>
+#include <iostream>
 #include <SDL2/SDL.h>
-#include "treasureHunt.hh"
+
 #include "../lib/sdlFunctions.hh"
+#include "treasureHunt.hh"
 #include "game.hh"
 #include "menu.hh"
 #include "gain.hh"
-#include <cstdlib>
+
 
 /**************** Name of the function **********************
 ∗ main()			                                        *
@@ -34,15 +38,15 @@ int main()
   SDL_Init(SDL_INIT_EVERYTHING);
   TTF_Init();
 
-  SDL_Window *screen = SDL_CreateWindow(
+  SDL_Window *window = SDL_CreateWindow(
     "My Game Window",
 
     SDL_WINDOWPOS_UNDEFINED,
     SDL_WINDOWPOS_UNDEFINED,
 
-    SCREEN_WIDTH, SCREEN_HEIGHT,
+    WINDOW_WIDTH, WINDOW_HEIGHT,
 
-    SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL
+    SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
   );
 
   while(!quit)
@@ -51,12 +55,12 @@ int main()
     {
       case 0:
         printf("0");
-        gamestate = menu(screen);
+        gamestate = menu(window);
 
         break;
       case 1:
         // printf("1");
-        // gamestate = game(screen);
+        // gamestate = game(window);
 
         break;
       case 2:
@@ -67,6 +71,10 @@ int main()
     }
   }
 
+  // Close and destroy the window
+  SDL_DestroyWindow(window);
+
+  // Clean up
   TTF_Quit();
   SDL_Quit();
 
