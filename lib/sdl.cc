@@ -73,6 +73,8 @@ void apply_texture(SDL_Texture *source, int x, int y, SDL_Rect *clip)
   SDL_Rect offset;
   offset.x = x;
   offset.y = y;
+  offset.w = 640;
+  offset.h = 420;
 
   refresh_screen(
     [source, offset]() {
@@ -81,7 +83,7 @@ void apply_texture(SDL_Texture *source, int x, int y, SDL_Rect *clip)
 
       // SDL2
       // Move the texture's contents to the video framebuffer
-      SDL_RenderCopy(renderer, source, NULL, NULL);
+      SDL_RenderCopy(renderer, source, NULL, &offset);
 
       // SDL_RenderCopy(renderer, source, clip, &offset);
     }
