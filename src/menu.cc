@@ -9,6 +9,8 @@
 
 #include "menu.hh"
 #include "button.cc"
+#include <functional>
+#include <iostream>
 
 int menu()
 {
@@ -48,7 +50,6 @@ int menu()
       }
 
       drawMenu(background, &play, &quit);
-      SDL_RenderPresent(renderer);
 
       manageFrames(startTicks);
   }
@@ -75,7 +76,7 @@ int menuEvents(Button *play, Button *quit)
             gamestate = 2;
         }
 
-        //when the player quits the window
+        // when the player quits the window
         if(event.type == SDL_QUIT)
         {
             gamestate = 2;
@@ -87,16 +88,15 @@ int menuEvents(Button *play, Button *quit)
 
 void drawMenu(SDL_Texture *background, Button *play, Button *quit)
 {
-    //we draw the background
-    SDL_Rect backgroundPosition;
-    backgroundPosition.x = 0;
-    backgroundPosition.y = 0;
+  // SDL_SetRenderDrawColor(renderer, 0, 200, 200, 255);
 
-    SDL_RenderCopy(renderer, background, NULL, &backgroundPosition);
+  // Draw background
+  apply_texture(background, 0, 0, NULL);
 
-    SDL_RenderPresent(renderer);
+  // we draw the buttons on the screen
+  // drawButton(play);
+  // drawButton(quit);
 
-    //we draw the buttons on the screen
-    drawButton(play);
-    drawButton(quit);
+  // fprintf(stderr, "%s\n", (SDL_GetError()));
+  // exit(1);
 }

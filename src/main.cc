@@ -14,8 +14,8 @@
 
 #include "../lib/sdl.hh"
 #include "treasureHunt.hh"
-// #include "game.cc"
 #include "menu.cc"
+// #include "game.cc"
 
 
 /**************** Name of the function **********************
@@ -39,7 +39,7 @@ int main()
   TTF_Init();
 
   window = SDL_CreateWindow(
-    "My Game Window",
+    "Treasure Hunt",
 
     SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED,
@@ -53,6 +53,7 @@ int main()
 
   while(!quit)
   {
+    // Handle game state
     switch(gamestate)
     {
       case 0:
@@ -70,6 +71,12 @@ int main()
 
         break;
     }
+
+    // // Clear the existing video framebuffer
+    // SDL_RenderClear(renderer);
+    //
+    // // Update screen
+    // SDL_RenderPresent(renderer);
   }
 
   // Destroy the window and the renderer

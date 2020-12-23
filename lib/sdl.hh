@@ -12,11 +12,12 @@
 
 #include <stdlib.h>
 #include <string>
+#include <functional>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <sstream>
-#include <iostream>
 #include <math.h>
 
 using namespace std;
@@ -62,6 +63,8 @@ Vector2 getTextSize(string text, TTF_Font *font);
 int randInt(int mi, int ma);
 
 void manageFrames(int startTicks);
+
+void refresh_screen(std::function<void()> operation);
 
 string convertToString(int e);
 #endif

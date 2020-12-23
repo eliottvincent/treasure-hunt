@@ -9,6 +9,9 @@
 
 #include "sdl.hh"
 #include "../src/treasureHunt.hh"
+#include <string>
+#include <functional>
+#include <iostream>
 
 using namespace std;
 
@@ -71,11 +74,18 @@ void apply_texture(SDL_Texture *source, int x, int y, SDL_Rect *clip)
   offset.x = x;
   offset.y = y;
 
-  // SDL1.2
-  // SDL_BlitSurface( source, clip, destination, &offset );
+  refresh_screen(
+    [source, offset]() {
+      // SDL1.2
+      // SDL_BlitSurface( source, clip, destination, &offset );
 
-  // SDL2
-  SDL_RenderCopy(renderer, source, clip, &offset);
+      // SDL2
+      // Move the texture's contents to the video framebuffer
+      SDL_RenderCopy(renderer, source, NULL, NULL);
+
+      // SDL_RenderCopy(renderer, source, clip, &offset);
+    }
+  );
 }
 
 
@@ -158,6 +168,18 @@ void manageFrames(int startTicks)
     int endMs = SDL_GetTicks();
     int delayMs = FPS - (endMs - startTicks);
     SDL_Delay(delayMs);
+}
+
+void refresh_screen(std::function<void()> operation)
+{
+  // Wipe out the existing video framebuffer
+  SDL_RenderClear(renderer);
+
+  // Run operation (i.e. write a texture to the video framebuffer)
+  operation();
+
+  // Put the video framebuffer on the screen
+  SDL_RenderPresent(renderer);
 }
 
 string convertToString(int e)
