@@ -1,7 +1,5 @@
 #include "player.hh"
 
-using namespace std;
-
 Player createPlayer(int id, Vector2 coords, SDL_Texture *sprite)
 {
     Player p;

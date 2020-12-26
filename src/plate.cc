@@ -1,8 +1,5 @@
 #include "plate.hh"
 
-using namespace std;
-
-
 void createOccurrences(int position[])
 {
     int index = 0;

@@ -10,29 +10,7 @@
 #include "button.hh"
 #include "player.hh"
 
-extern SDL_Renderer *renderer;
-
-
-/**************** Name of the function **********************
-∗ gain						                                *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It draws the "gain" screen we a player win     	        *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The screen's surface, the player who won                  *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The "gain" screen                                         *
-************************************************************/
 int gain(Player *winner);
-
-/**************** Name of the function **********************
-∗ gainEvents						                        *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Description ****************************
-∗ It manages the events ont the "gain" screen      	        *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Input *************************************
-∗ The buttons                                               *
-∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ Output ********************************
-∗ The gamestate                                             *
-************************************************************/
 int gainEvents(Button *replay, Button *quit);
 
 #endif

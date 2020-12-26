@@ -1,9 +1,7 @@
 #include "button.hh"
-#include "../lib/sdl.cc"
+#include "../lib/sdl.hh"
 
-using namespace std;
-
-Button createButton(SDL_Texture *texture, string text, int px, int py, TTF_Font *font)
+Button createButton(SDL_Texture *texture, std::string text, int px, int py, TTF_Font *font)
 {
     Button b;
 
@@ -20,7 +18,7 @@ Button createButton(SDL_Texture *texture, string text, int px, int py, TTF_Font 
 
 void drawButton(Button *pbutton)
 {
-    apply_texture(pbutton->sprite, pbutton->x, pbutton->y, NULL);
+    draw_texture(pbutton->sprite, pbutton->x, pbutton->y);
 
     Vector2 size = getTextSize(pbutton->text, pbutton->font);
 

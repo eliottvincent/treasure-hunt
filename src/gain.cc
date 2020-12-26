@@ -1,7 +1,5 @@
 #include "gain.hh"
 
-using namespace std;
-
 int gain(Player *winner)
 {
     SDL_Texture *button_sprite;
@@ -43,7 +41,7 @@ int gain(Player *winner)
         //we draw the text
         RGBA white;
         white.r = 255; white.g = 255; white.b = 255; white.a = 255;
-        string msg = "Le joueur " + convertToString(winner->id) + " a gagne !";
+        std::string msg = "Le joueur " + convertToString(winner->id) + " a gagne !";
         Vector2 size = getTextSize(msg, big);
         drawText(msg, WINDOW_WIDTH/2 - size.x /2-25, 100, big, 20, white);
 
