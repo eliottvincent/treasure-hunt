@@ -1,11 +1,3 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: menu.h
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
 
 #ifndef menu_H
 #define menu_H

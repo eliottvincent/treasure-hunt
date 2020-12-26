@@ -1,13 +1,4 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: gain.cc
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
-
- #include "gain.hh"
+#include "gain.hh"
 
 using namespace std;
 

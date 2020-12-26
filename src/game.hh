@@ -1,12 +1,3 @@
-#ifndef game_H
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: game.h
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
 
 #define game_H
 

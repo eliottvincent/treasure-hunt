@@ -1,12 +1,3 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: button.h
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
-
 #ifndef BUTTON_H
 #define BUTTON_H
 

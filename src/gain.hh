@@ -1,12 +1,3 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: gain.h
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
-
 #ifndef GAIN_H
 #define GAIN_H
 

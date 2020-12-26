@@ -1,12 +1,3 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: sdl.cc
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent, Nicholas Journet
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
-
 #include "sdl.hh"
 #include "../src/treasureHunt.hh"
 #include <string>

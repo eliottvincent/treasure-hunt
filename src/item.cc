@@ -1,12 +1,3 @@
-/********************************************************************************************
- * Project: Treasure Hunt
- * File: item.cc
- * ------------------------------------------------------------------------------------------
- * Authors: Pierre Lethuillier, Eliott Vincent
- * License: This work is licensed under the Creative Commons
- *          Attribution-NonCommercial-ShareAlike 4.0 International License.
- *********************************************************************************************/
-
 #include "item.hh"
 
 Item createPlayer(int x, int y)
