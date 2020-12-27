@@ -4,15 +4,9 @@
 int main(int argc, char *argv[])
 {
   Game &game = Game::getInstance();
+
   game.init();
-
-  std::cout << "main::&game                         " << &game << "\n";
-  std::cout << "main::game-renderer                 " << game.renderer << "\n";
-  std::cout << "main::Game::getInstance()           " << &Game::getInstance() << "\n";
-  std::cout << "main::Game::getInstance()->renderer " << Game::getInstance().renderer << "\n";
-
   game.changeState(Menu::instance());
-  printf("Before while...\n");
 
   SDL_Event event;
 
@@ -20,25 +14,19 @@ int main(int argc, char *argv[])
   {
     while(SDL_PollEvent(&event))
     {
-        if(event.type == SDL_QUIT)
-        {
-          game.cleanup();
-        }
+      if(event.type == SDL_QUIT)
+      {
+        game.quit();
+      }
     }
 
-    SDL_RenderClear(game.renderer);
-    SDL_SetRenderDrawColor(game.renderer, 150, 0, 0, 255);
-    SDL_RenderPresent(game.renderer);
+    game.handleEvents();
+    game.update();
+    game.draw();
   }
 
-  // while (game.running())
-  // {
-  //   printf("Loop...\n");
-  //
-  //   game.handleEvents();
-  //   game.update();
-  //   game.draw();
-  // }
+  // fprintf(stderr, "%s\n", (SDL_GetError()));
+  // exit(1);
 
   game.cleanup();
 
