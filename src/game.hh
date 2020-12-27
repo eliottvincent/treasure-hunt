@@ -1,27 +1,55 @@
-
-#define game_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <SDL2/SDL.h>
-#include <cstdlib>
-#include <iostream>
-#include <string>
+#include <vector>
+
 #include "../lib/sdl.hh"
-#include "plate.hh"
 #include "treasureHunt.hh"
-#include "button.hh"
-#include "player.hh"
-#include "combo.hh"
-#include "board.hh"
-#include "gain.hh"
 
-extern SDL_Renderer *renderer;
+class State;
 
-int game();
+class Game
+{
+  private:
+    // Make constructor private
+    Game() {};
 
-void manageClick(SDL_Event &event, Player players[], int &current_turn, Map tiles);
+    std::vector <State*> states;
+    bool m_running;
 
-Player getOtherPlayer(Player players[], int currentTurn);
+  public:
+    // Singleton
+    static Game &getInstance()
+    {
+      static Game instance;
 
-int doesAPlayerWon(Player players[], Map tiles);
+      return instance;
+    }
+
+    // Methods we don't want
+    Game(Game const&)           = delete;
+    void operator=(Game const&) = delete;
+
+    // Other variables and methods
+    SDL_Window *window;
+    SDL_Surface *screen;
+    SDL_Renderer *renderer;
+
+    void init();
+    void cleanup();
+
+    void changeState(State *state);
+    void pushState(State *state);
+    void popState();
+
+    void handleEvents();
+    void draw();
+    void update();
+
+    void quit() { m_running = false; };
+
+    bool running() { return m_running; };
+};
 
 #endif

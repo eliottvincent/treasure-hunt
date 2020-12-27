@@ -1,75 +1,46 @@
+#include "game.hh"
+#include "menu.hh"
 
-#include <cstdlib>
-#include <stdlib.h>
-#include <iostream>
-#include <SDL2/SDL.h>
-
-#include "../lib/sdl.hh"
-#include "treasureHunt.hh"
-#include "menu.cc"
-// #include "game.cc"
-
-
-int main()
+int main(int argc, char *argv[])
 {
-  int gamestate = 0;
-  bool quit     = false;
+  Game &game = Game::getInstance();
+  game.init();
 
-  srand(time(NULL));
+  std::cout << "main::&game                         " << &game << "\n";
+  std::cout << "main::game-renderer                 " << game.renderer << "\n";
+  std::cout << "main::Game::getInstance()           " << &Game::getInstance() << "\n";
+  std::cout << "main::Game::getInstance()->renderer " << Game::getInstance().renderer << "\n";
 
-  SDL_Init(SDL_INIT_EVERYTHING);
-  IMG_Init(IMG_INIT_PNG);
-  TTF_Init();
+  game.changeState(Menu::instance());
+  printf("Before while...\n");
 
-  window = SDL_CreateWindow(
-    "Treasure Hunt",
+  SDL_Event event;
 
-    SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED,
-
-    WINDOW_WIDTH, WINDOW_HEIGHT,
-
-    SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL
-  );
-
-  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
-  while(!quit)
+  while (game.running())
   {
-    // Handle game state
-    switch(gamestate)
+    while(SDL_PollEvent(&event))
     {
-      case 0:
-        gamestate = menu();
-
-        break;
-
-      case 1:
-        // gamestate = game();
-
-        break;
-
-      case 2:
-        quit = true;
-
-        break;
+        if(event.type == SDL_QUIT)
+        {
+          game.cleanup();
+        }
     }
 
-    // // Clear the existing video framebuffer
-    // SDL_RenderClear(renderer);
-    //
-    // // Update screen
-    // SDL_RenderPresent(renderer);
+    SDL_RenderClear(game.renderer);
+    SDL_SetRenderDrawColor(game.renderer, 150, 0, 0, 255);
+    SDL_RenderPresent(game.renderer);
   }
 
-  // Destroy the window and the renderer
-  SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
+  // while (game.running())
+  // {
+  //   printf("Loop...\n");
+  //
+  //   game.handleEvents();
+  //   game.update();
+  //   game.draw();
+  // }
 
-  // Clean up
-  IMG_Quit();
-  TTF_Quit();
-  SDL_Quit();
+  game.cleanup();
 
   return 0;
 }

@@ -1,173 +1,108 @@
+#include <stdio.h>
+#include <SDL2/SDL.h>
 
 #include "game.hh"
-#include "board.cc"
+#include "state.hh"
 
-using namespace std;
-
-int game()
+void Game::init()
 {
-    //we load the necessary assets
-    TTF_Font *big, *small;
-    SDL_Texture *player1_sprite, *player2_sprite, *coins;
+  // Init SDL
+  SDL_Init(SDL_INIT_EVERYTHING);
+  IMG_Init(IMG_INIT_PNG);
+  TTF_Init();
 
-    big = TTF_OpenFont("assets/font.ttf", 50);
-    small = TTF_OpenFont("assets/font.ttf", 25);
-    player1_sprite = load_image_transparent("assets/player1.png",0,255,255);
-    player2_sprite = load_image_transparent("assets/player2.png",0,255,255);
-    coins = load_image_transparent("assets/coins.bmp",0,255,255);
+  // Create SDL objects
+  window = SDL_CreateWindow("Treasure Hunt", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    //we create the logicals vars of the game
-    bool done = false;
-    int gamestate = 1;
-    int current_turn = 0;
-
-    //we create the plate
-    Map tiles;
-    initPlate(tiles);
-
-    //we create the players
-    Vector2 coords;
-    coords.x = PLATE_SIZE/2;
-    coords.y = PLATE_SIZE/2;
-    Player players[2];
-    players[0] = createPlayer(1, coords, player1_sprite);
-    players[1] = createPlayer(2, coords, player2_sprite);
-
-    //we create the baord
-    Combo combo1 = createCombo(20, 140, &players[0]);
-    Combo combo2 = createCombo(120, 140, &players[1]);
-    Board board = buildBoard(60*PLATE_SIZE, 10, &combo1, &combo2);
-    loadBoard(board, player1_sprite, player2_sprite, coins,  NULL);
-
-    //the game's logic
-    while(!done)
-    {
-        int startTicks = SDL_GetTicks();
-        SDL_Event event;
-        while(SDL_PollEvent(&event))
-        {
-
-            //if we close the window
-            if(event.type == SDL_QUIT)
-            {
-                gamestate = 2;
-                done = true;
-                break;
-            }
-            //if we click
-            if(event.type == SDL_MOUSEBUTTONDOWN)
-            {
-                manageClick(event, players, current_turn, tiles);
-                break;
-            }
-        }
-
-        //we update the player's data
-        if(updatePlayer(players[current_turn], tiles))
-        {
-            current_turn+=1;
-            if(current_turn>1)
-                current_turn = 0;
-            players[current_turn].position = getOtherPlayer(players, current_turn).position;
-            players[current_turn].coords = getOtherPlayer(players, current_turn).position;
-        }
-
-        //we check if there is a winner or not
-        int winner = doesAPlayerWon(players, tiles);
-        if(winner != 0)
-        {
-            done = true;
-            gamestate = gain(&players[winner-1]);
-        }
-
-        //we clear the screen
-        SDL_Rect  rect;
-        rect.x = 0;
-        rect.y = 0;
-        rect.w = WINDOW_WIDTH;
-        rect.h = WINDOW_HEIGHT;
-
-        SDL_RenderClear(renderer);
-
-        SDL_SetRenderDrawColor(renderer, 231, 208, 14, SDL_ALPHA_OPAQUE);
-        SDL_RenderFillRect(renderer, &rect);
-
-        //we draw the plate with the coins
-        drawPlate(tiles, coins);
-
-        //we draw the players
-        drawPlayer(players[current_turn]);
-
-        //we draw the board
-        drawBoard(board, small, player1_sprite, player2_sprite, current_turn+1);
-
-        //we refresh the screen
-        SDL_RenderPresent(renderer);
-
-        if(!done)
-            manageFrames(startTicks);
-    }
-    return gamestate;
+  m_running = true;
 }
 
-void manageClick(SDL_Event &event, Player players[], int &current_turn, Map tiles)
+void Game::cleanup()
 {
-    if(event.type == SDL_MOUSEBUTTONDOWN)
-    {
-        int x = event.button.x;
-        int y = event.button.y;
+  // Clean all states
+  while (!states.empty())
+  {
+    states.back()->cleanup();
+    states.pop_back();
+  }
 
-        //we test if the click is inside the plate or not
-        if(x>=0 && x<=PLATE_SIZE*60 && y>=0 && y<=PLATE_SIZE*60)
-        {
-            Vector2 coords;
-            coords.x = (int)(x/60);
-            coords.y = (int)(y/60);
-            movePlayer(players[current_turn], coords, tiles);
-        }
-    }
+  // Destroy the window and the renderer
+  SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(renderer);
+
+  // Clean up
+  IMG_Quit();
+  TTF_Quit();
+  SDL_Quit();
 }
 
-Player getOtherPlayer(Player players[], int currentTurn)
+void Game::changeState(State *state)
 {
-    currentTurn = currentTurn -1;
-    if(currentTurn<0)
-        currentTurn = 1;
-    return players[currentTurn];
+  // Clean current state
+  if (!states.empty())
+  {
+    states.back()->cleanup();
+    states.pop_back();
+  }
+
+  // Store and initialize new state
+  states.push_back(state);
+  states.back()->init();
 }
 
-int doesAPlayerWon(Player players[], Map tiles)
+void Game::pushState(State *state)
 {
-    int winner = 0;
-    int index = 0;
-    while(index < 2 && winner == 0)
-    {
-        int px =round((players[index].position.x) / 60);
-        int py = round((players[index].position.y) / 60);
+  // Pause current state
+  if (!states.empty())
+  {
+    states.back()->pause();
+  }
 
-        //we test if the player can move
-        bool found = false;
-        int y = 0;
-        while(y<PLATE_SIZE-1 && !found)
-        {
-            if(tiles[px][y].value != 0)
-                found = true;
-            y+=1;
-        }
-        int x = 0;
-        while(!found && x < PLATE_SIZE-1)
-        {
-            if(tiles[x][py].value != 0)
-                found = true;
-            x+=1;
-        }
-        if(!found)
-            winner = getOtherPlayer(players, index).id;
-        if(players[index].points >= 500)
-        {
-            winner = players[index].id;
-        }
-        index+=1;
-    }
-    return winner;
+  // Store and initialize new state
+  states.push_back(state);
+  states.back()->init();
+}
+
+void Game::popState()
+{
+  // Clean current state
+  if (!states.empty())
+  {
+    states.back()->cleanup();
+    states.pop_back();
+  }
+
+  // Resume previous state
+  if (!states.empty())
+  {
+    states.back()->resume();
+  }
+}
+
+void Game::handleEvents()
+{
+  // Let the state handle the events
+  if (!states.empty())
+  {
+    states.back()->handleEvents(this);
+  }
+}
+
+void Game::draw()
+{
+  // Let the state draw
+  if (!states.empty())
+  {
+    states.back()->draw(this);
+  }
+}
+
+void Game::update()
+{
+  // Let the state update
+  if (!states.empty())
+  {
+    states.back()->update(this);
+  }
 }
